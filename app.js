@@ -2,6 +2,8 @@
 const Hapi = require('hapi');
 const Queue = require('bee-queue');
 const mongoose = require('mongoose');
+const myredis = require('redis');
+
 const dotenv = require('dotenv');
 const Counter = require('./model/Counter');
 dotenv.config();
@@ -20,7 +22,7 @@ mongoose
   try {
     var counterQueue = new Queue('increaseCounter', {
       redis: {
-        host: process.env.REDIS_URL
+        host: 'redis'
       },
       isWorker: true
     });
